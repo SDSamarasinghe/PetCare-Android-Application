@@ -32,13 +32,14 @@ public class DBHandler extends SQLiteOpenHelper {
                     UserManagement.User._ID + " INTEGER PRIMARY KEY," +
                     UserManagement.User.COLUMN_1 + " TEXT," +
                     UserManagement.User.COLUMN_2 + " TEXT," +
-                    UserManagement.User.COLUMN_3 + " TEXT)";
+                    UserManagement.User.COLUMN_3 + " TEXT," +
+                    UserManagement.User.COLUMN_4 + " TEXT)";
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + UserManagement.User.TABLE_NAME;
 
 
-    public Long addInfo(String name, String type, String gender){
+    public Long addInfo(String name, String type, String gender, String availability){
 
         // Gets the data repository in write mode
         SQLiteDatabase db = getWritableDatabase();
@@ -48,6 +49,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(UserManagement.User.COLUMN_1, name);
         values.put(UserManagement.User.COLUMN_2, type);
         values.put(UserManagement.User.COLUMN_3, gender);
+        values.put(UserManagement.User.COLUMN_4, availability);
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(UserManagement.User.TABLE_NAME, null, values);

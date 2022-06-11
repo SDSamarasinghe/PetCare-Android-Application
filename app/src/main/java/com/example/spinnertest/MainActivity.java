@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -16,6 +19,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     Spinner spi1,spi2,spi3;
     Button btnAdd,btnview;
+    RadioGroup radioGroup;
+    RadioButton available,not_available;
+    String availability;
 
 
     @Override
@@ -28,11 +34,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         spi3 = findViewById(R.id.spinnerGender);
         btnAdd = findViewById(R.id.btnAdd);
         btnview = findViewById(R.id.btnview);
+        radioGroup = findViewById(R.id.radioGroup);
+        available = findViewById(R.id.radio_one);
+        not_available = findViewById(R.id.radio_two);
+
 
 
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,R.array.names, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spi1.setOnItemSelectedListener(this);
+
 
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.category, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -49,7 +60,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             public void onClick(View v) {
                 DBHandler db = new DBHandler(getApplicationContext());
 
-                long result = db.addInfo(spi1.getSelectedItem().toString(), spi2.getSelectedItem().toString(),spi3.getSelectedItem().toString());
+                if (available.isChecked()){
+                    availability="Available";
+                }
+                else {
+                    availability = "Not available";
+                }
+
+                long result = db.addInfo(spi1.getSelectedItem().toString(), spi2.getSelectedItem().toString(),spi3.getSelectedItem().toString(),availability);
 
                 if (result>0){
                     Toast.makeText(MainActivity.this, "Insert Success", Toast.LENGTH_SHORT).show();
@@ -60,7 +78,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
             }
+
+
         });
+
 
 
         btnview.setOnClickListener(new View.OnClickListener() {

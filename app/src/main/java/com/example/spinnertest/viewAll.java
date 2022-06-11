@@ -25,9 +25,11 @@ public class viewAll extends AppCompatActivity {
         StringBuffer buffer = new StringBuffer();
 
         while (res.moveToNext()){
-            buffer.append("Username :"+res.getString(0)+"\n");
-            buffer.append("Password :"+res.getString(1)+"\n");
-            buffer.append("Availability :"+res.getString(2)+"\n");
+            buffer.append("User_ID :"+res.getString(0)+"\n");
+            buffer.append("Username :"+res.getString(1)+"\n");
+            buffer.append("Type :"+res.getString(2)+"\n");
+            buffer.append("Gender :"+res.getString(3)+"\n");
+            //buffer.append("Availability :"+res.getString(4)+"\n");
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(viewAll.this);

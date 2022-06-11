@@ -13,5 +13,6 @@ public final class UserManagement {
         public static final String COLUMN_1 = "UserName";
         public static final String COLUMN_2 = "Type";
         public static final String COLUMN_3 = "Gender";
+        public static final String COLUMN_4 = "Availability";
     }
 }
