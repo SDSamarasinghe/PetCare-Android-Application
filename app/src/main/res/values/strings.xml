@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">SpinnerTest</string>
+    <string-array name="names">
+        <item>Sadish</item>
+        <item>Dilmin</item>
+        <item>Samarasinghe</item>
+    </string-array>
+
+    <string-array name="category">
+        <item>Group</item>
+        <item>Individual</item>
+        <item>normal</item>
+    </string-array>
+
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+</resources>
