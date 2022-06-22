@@ -15,13 +15,14 @@ import java.util.ArrayList;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
     private Context context;
-    private ArrayList pet_id,pet_name, pet_address;
+    private ArrayList pet_id,pet_name, pet_address, pet_gender;
 
-    CustomAdapter(Context context, ArrayList pet_id,ArrayList pet_name,ArrayList pet_address){
+    CustomAdapter(Context context, ArrayList pet_id,ArrayList pet_name,ArrayList pet_address, ArrayList pet_gender){
         this.context = context;
         this.pet_id = pet_id;
         this.pet_name = pet_name;
         this.pet_address = pet_address;
+        this.pet_gender = pet_gender;
 
 
 
@@ -39,6 +40,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.pet_id_txt.setText(String.valueOf(pet_id.get(position)));
         holder.pet_name_txt.setText(String.valueOf(pet_name.get(position)));
         holder.pet_address_txt.setText(String.valueOf(pet_address.get(position)));
+        holder.pet_gender_txt.setText(String.valueOf(pet_address.get(position)));
        // holder.book_pages_txt.setText(String.valueOf(book_pages.get(position)));
 
     }
@@ -49,12 +51,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView pet_id_txt, pet_name_txt, pet_address_txt;
+        TextView pet_id_txt, pet_name_txt, pet_address_txt,pet_gender_txt;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             pet_id_txt = itemView.findViewById(R.id.pet_id_txt);
             pet_name_txt = itemView.findViewById(R.id.pet_name_txt);
             pet_address_txt = itemView.findViewById(R.id.pet_address_txt);
+            pet_gender_txt = itemView.findViewById(R.id.gender);
             //book_pages_txt = itemView.findViewById(R.id.book_pages_txt);
         }
     }

@@ -13,6 +13,8 @@ public final class Pets {
         public static final String COLUMN_1 = "petName";
         public static final String COLUMN_2 = "password";
         public static final String COLUMN_3 = "address";
+        public static final String COLUMN_4 = "gender";
+
 
 
     }

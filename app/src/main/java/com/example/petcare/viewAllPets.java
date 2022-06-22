@@ -17,7 +17,7 @@ public class viewAllPets extends AppCompatActivity {
     RecyclerView recyclerView;
     //FloatingActionButton add_button;
     DBHandler myDB;
-    ArrayList<String> pet_id, pet_name, pet_Address;
+    ArrayList<String> pet_id, pet_name, pet_Address, pet_gender;
     CustomAdapter customAdapter;
 
     @Override
@@ -32,11 +32,12 @@ public class viewAllPets extends AppCompatActivity {
         pet_id = new ArrayList<>();
         pet_name= new ArrayList<>();
         pet_Address= new ArrayList<>();
+        pet_gender = new ArrayList<>();
         //book_pages = new ArrayList<>();
 
         storeDataInArrays();
 
-        customAdapter = new CustomAdapter(viewAllPets.this,pet_id, pet_name, pet_Address);
+        customAdapter = new CustomAdapter(viewAllPets.this,pet_id, pet_name, pet_Address, pet_gender);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(viewAllPets.this));
     }
@@ -51,6 +52,7 @@ public class viewAllPets extends AppCompatActivity {
                 pet_id.add(cursor.getString(0));
                 pet_name.add(cursor.getString(1));
                 pet_Address.add(cursor.getString(2));
+                pet_gender.add(cursor.getString(3));
                 //book_pages.add(cursor.getString(3));
 
             }

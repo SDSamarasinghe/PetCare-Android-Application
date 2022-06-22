@@ -5,6 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.BaseColumns;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBHandler extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
@@ -32,12 +36,13 @@ public class DBHandler extends SQLiteOpenHelper {
                     Pets.Pet._ID + " INTEGER PRIMARY KEY," +
                     Pets.Pet.COLUMN_1 + " TEXT," +
                     Pets.Pet.COLUMN_2 + " TEXT," +
-                    Pets.Pet.COLUMN_3 + " TEXT)";
+                    Pets.Pet.COLUMN_3 + " TEXT," +
+                    Pets.Pet.COLUMN_4 + " TEXT)";
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + Pets.Pet.TABLE_NAME;
 
-    public Long addPetInfo(String petname, String password, String address){
+    public Long addPetInfo(String petname, String password, String address, String gender){
         // Gets the data repository in write mode
         SQLiteDatabase db = getWritableDatabase();
 
@@ -46,6 +51,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(Pets.Pet.COLUMN_1, petname);
         values.put(Pets.Pet.COLUMN_2, password);
         values.put(Pets.Pet.COLUMN_3, address);
+        values.put(Pets.Pet.COLUMN_4, gender);
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(Pets.Pet.TABLE_NAME, null, values);
 
@@ -69,6 +75,47 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         else {
             return false;
+        }
+    }
+
+    public boolean loginUser(String username, String password){
+        SQLiteDatabase db = getReadableDatabase();
+
+        String[] projection = {
+                BaseColumns._ID,
+                Pets.Pet.COLUMN_1,
+                Pets.Pet.COLUMN_2
+        };
+
+        String selection = Pets.Pet.COLUMN_1 + " = ? AND "+ Pets.Pet.COLUMN_2+ " = ?";
+        String[] selectionArgs = {username , password};
+
+        String sortOrder =
+                Pets.Pet.COLUMN_1 + " ASC";
+
+        Cursor cursor = db.query(
+                Pets.Pet.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                sortOrder
+        );
+
+        List validUser = new ArrayList();
+
+        while (cursor.moveToNext()){
+            String user = cursor.getString(cursor.getColumnIndexOrThrow(Pets.Pet.COLUMN_1));
+            validUser.add(user);
+        }
+        cursor.close();
+
+        if (validUser.isEmpty()){
+            return false;
+        }
+        else {
+            return true;
         }
     }
 

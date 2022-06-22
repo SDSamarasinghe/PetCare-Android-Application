@@ -42,6 +42,26 @@
         android:hint="Password"
         android:inputType="textPersonName"
         android:text="" />
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/radio_male"
+            android:layout_width="match_parent"
+            android:text="Male"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/radio_female"
+            android:layout_width="match_parent"
+            android:text="Female"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content"/>
+
+    </RadioGroup>
 
     <Button
         android:id="@+id/addbtnR"
